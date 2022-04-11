@@ -9,7 +9,7 @@ def InsertionSort(A):
         key = A[i]
         j = i - 1
         # if current element is smaller than sorted last element
-        # move sorted last element to current element
+        # copy sorted last element to current element since we have copy as key.
         # continue till position is found
         while j >= 0 and A[j] > key:
             A[j+1] = A[j]
