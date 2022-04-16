@@ -2,7 +2,6 @@ def NearestGreaterToLeft(arr,n):
     #code here
     out = list()
     stack = list()
-    
     for j in range(n):
         if len(stack) == 0:
             out.append(-1)
