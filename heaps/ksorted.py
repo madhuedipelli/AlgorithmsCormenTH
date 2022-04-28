@@ -11,6 +11,6 @@ for i in range(len(arr)):
     heapq.heappush(li,arr[i])
     if len(li)>k:
         out.append(heapq.heappop(li))
-for i in range(k):
+while len(li):
     out.append(heapq.heappop(li))
 print(out)

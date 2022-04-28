@@ -12,5 +12,5 @@ for i in arr:
     if len(li) > k:
         heapq.heappop(li)
 
-out = [heapq.heappop(li) for i in range(k)]
+out = [heapq.heappop(li) for i in range(len(li))]
 print(out)
