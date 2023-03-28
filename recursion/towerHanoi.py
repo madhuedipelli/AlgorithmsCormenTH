@@ -1,12 +1,19 @@
-def Print(fro,to):
-    print("moved  from {} to {}".format(fro,to))
+def tower_of_hanoi(num, src, dest, aux):
+    """
+    key points:
+    for n disks on A,n-1 disks are moved from A to C
+    nth disk is moved from A to B
+    now the problem becomes length n-1,
+    src as C, dst as B and aux as A and so on.
+    """
+    if num == 1:
+        print("move disk 1 from pole source : {}\
+             to destination : {}".format(src, dest))
+        return
+    tower_of_hanoi(num - 1, src, aux, dest)
+    print("move disk {} from source : {} to destination : {}".format(num, src, dest))
+    tower_of_hanoi(num - 1, aux, dest, src)
 
-def towerHanoi(n,frm,to,spare):
-    if n == 1:
-        Print(frm,to)
-    else:
-        towerHanoi(n-1,frm,spare,to)
-        towerHanoi(1,frm,to,spare)
-        towerHanoi(n-1,spare,to,frm)
-        print()
-towerHanoi(4,"from","to","spare")
+
+n = input("Enter integer less than 10 : ")
+tower_of_hanoi(int(n), 'A', 'B', 'C')
