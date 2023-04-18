@@ -1,12 +1,12 @@
-def Print(fro,to):
-    print("moved  from {} to {}".format(fro,to))
-
-def towerHanoi(n,frm,to,spare):
+def towerOfHanoi(n, src, dest, aux):
     if n == 1:
-        Print(frm,to)
-    else:
-        towerHanoi(n-1,frm,spare,to)
-        towerHanoi(1,frm,to,spare)
-        towerHanoi(n-1,spare,to,frm)
-        print()
-towerHanoi(4,"from","to","spare")
+        print("move disk 1 from pole source : {}\
+             to destination : {}".format(src, dest))
+        return
+    towerOfHanoi(n - 1, src, aux, dest)
+    print("move disk {} from source : {} to destination : {}".format(n, src, dest))
+    towerOfHanoi(n - 1, aux, src, dest)
+
+
+n = input("Enter integer less than 10 : ")
+towerOfHanoi(int(n), 'A', 'B', 'C')
