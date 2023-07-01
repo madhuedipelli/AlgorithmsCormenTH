@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/recursion.iml" filepath="$PROJECT_DIR$/.idea/recursion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AlgorithmsCormenTH.iml" filepath="$PROJECT_DIR$/.idea/AlgorithmsCormenTH.iml" />
     </modules>
   </component>
 </project>
