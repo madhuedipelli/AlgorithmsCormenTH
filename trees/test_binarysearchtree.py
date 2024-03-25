@@ -10,8 +10,20 @@ test = BinarySearchTree()
 test.put(12)
 test.put(7)
 test.put(3)
+print(f'size is {test.size()}')
 test.put(5)
 test.put(4)
+print(f'size is {test.size()}')
+
+print(f'rank of 12 is {test.rank(12)}')
 
 print(test.floor(6))
 print(test.ceil(6))
+
+
+test.inorder()
+print()
+test.preorder()
+print()
+test.postorder()
+print()

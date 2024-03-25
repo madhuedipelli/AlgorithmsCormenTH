@@ -3,11 +3,12 @@ class BinarySearchTree:
         self.root = None
 
     class Node:
-        def __init__(self,key,val):
+        def __init__(self,key,val,count=0):
             self.key = key
             self.val = val 
             self.left = None
             self.right = None
+            self.count = count
 
     def search(self,key):
         out = self.search_helper(self.root, key)
@@ -31,7 +32,7 @@ class BinarySearchTree:
 
     def put_helper(self,x,key,val):
         if x == None:
-            return self.Node(key,val)
+            return self.Node(key,val,1)
         
         if key < x.key :
             x.left = self.put_helper(x.left, key, val)
@@ -40,7 +41,7 @@ class BinarySearchTree:
             x.right = self.put_helper(x.right, key, val)
         else:
             x.val = val
-        
+        x.count = 1 + self.size_helper(x.left) + self.size_helper(x.right)
         return x
     
     def get_min(self):
@@ -105,3 +106,56 @@ class BinarySearchTree:
         if t is None:
             return x
         return t
+    
+    # in the interest of time lets print inorder here
+    # return queue iterable in the next iteration
+    def inorder(self):
+        self.inorder_helper(self.root)
+    
+    def inorder_helper(self,x):
+        if x is None:
+            return
+        self.inorder_helper(x.left)
+        print(x.key, end = ' ')
+        self.inorder_helper(x.right)
+    
+    def preorder(self):
+        self.preorder_helper(self.root)
+    
+    def preorder_helper(self,x):
+        if x is None:
+            return
+        print(x.key, end = ' ')
+        self.preorder_helper(x.left)
+        self.preorder_helper(x.right)
+    
+    def postorder(self):
+        self.postorder_helper(self.root)
+    
+    def postorder_helper(self,x):
+        if x is None:
+            return
+        self.postorder_helper(x.left)
+        self.postorder_helper(x.right)
+        print(x.key,end=' ')
+    
+    def size(self):
+        return self.size_helper(self.root)
+    
+    def size_helper(self,x):
+        if x is None:
+            return 0
+        return x.count
+    
+    def rank(self, key):
+        return self.rank_helper(self.root, key)
+    
+    def rank_helper(self, x, k):
+        if x is None:
+            return 0
+        if k < x.key :
+            return self.rank_helper(x.left,k)
+        elif k > x.key :
+            return 1 + self.size_helper(x.left) + self.rank_helper(x.right, k)
+        else:
+            return self.size_helper(x.left)
