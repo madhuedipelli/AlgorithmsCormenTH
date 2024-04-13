@@ -45,12 +45,18 @@ class BinarySearchTree:
         return x
     
     def get_min(self):
-        if self.root is None :
+        x = self.get_min_helper(self.root)
+        if x is None:
             return None
-        x = self.root
-        while x.left != None:
-            x = x.left
         return x.key
+    def get_min_helper(self, x):
+        if x is None:
+            return None
+        elif x.left is None:
+            return x
+        return self.get_min_helper(x.left)
+        
+        
     
     def get_max(self):
         if self.root is None:
@@ -159,3 +165,48 @@ class BinarySearchTree:
             return 1 + self.size_helper(x.left) + self.rank_helper(x.right, k)
         else:
             return self.size_helper(x.left)
+    
+    def deleteMin(self):
+        self.root = self.deleteMin_helper( self.root )
+    
+    def deleteMin_helper(self, x):
+        if x.left is None:
+            return x.right
+        x.left = self.deleteMin_helper(x.left)
+        x.count = 1 + self.size_helper(x.left) + self.size_helper(x.right)
+        return x
+    
+    def delete(self, key):
+        self.root = self.delete_helper(self.root, key)
+
+    def delete_helper(self, x, k):
+        if x is None:
+            return None
+        if k < x.key :
+            x.left = self.delete_helper(x.left, k)
+        elif k > x.key :
+            x.right = self.delete_helper(x.right, k)
+        else:
+            if x.right == None:
+                return x.left
+            if x.left == None:
+                return x.right
+            
+            t = x
+            #successor is used here
+            # predecessor with t.left max will work as well
+            x = self.get_min_helper(t.right)
+            x.right = self.deleteMin_helper(t.right)
+            x.left = t.left
+
+            x.count = self.size_helper(x.left) + self.size_helper(x.right) + 1
+            return x
+    
+        
+
+"""
+Notes:
+Hibbard deletion is asymmetric, meaning after random 100N puts and may be
+50N deletes , tree will become unbalanced and ops would cost sqrtN instead
+of logN per op.
+"""
